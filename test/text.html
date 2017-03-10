@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+		<style>
+		body{
+			margin:0px;
+		}
+			</style>
+		<script src="http://pengjiang.com/~jonny/cdn/js/easeljs-0.8.2.min.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas" width="640" height="1008" style="max-width:100%;height:auto;"></canvas>
+		<script>
+			var stage = new createjs.Stage('canvas');
+			//var canvas = document.getElementById('canvas');
+			//var ctx = canvas.getContext('2d');
+			//stage.autoClear = false;
+
+			var box = new createjs.Container();
+			stage.addChild(box);
+
+			var rect = new createjs.Shape();
+			rect.graphics.setStrokeStyle(2).beginStroke('red').beginFill('#eee').drawRect(50,10,100,100);;
+			box.addChild(rect);
+
+			var g = new createjs.Shape();
+			g.graphics.setStrokeStyle(1).setStrokeDash([10,5],10).beginStroke('red').drawCircle(100,60,50);
+			box.addChild(g);
+
+			var text = new createjs.Text('Hello World','12px arial','black');
+			text.x = '100';
+			text.y = '50';
+			text.textAlign = 'center';
+			box.addChild(text);
+
+
+			var title = new createjs.Text('onloading....','28px arial','black');
+			title.x = 640/2;
+			title.y = 1008/2;
+			title.textAlign = 'center';
+			stage.addChild(title);
+
+			createjs.Ticker.setFPS(60);
+			var speed = 5;
+			createjs.Ticker.addEventListener('tick',function (e){
+				box.x+=speed;
+				if(box.x>=540){
+					speed=Math.abs(speed)*-1;
+				}else if(box.x<=-50){
+					speed=Math.abs(speed);
+				}
+			tit(box.x);
+			stage.update();
+			});
+
+			function tit(x){
+			title.text = '正方形的x坐标为：' + x ;
+			};
+
+		</script>
+	</body>
+</html>

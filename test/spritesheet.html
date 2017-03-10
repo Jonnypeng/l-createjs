@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="//cdn.bootcss.com/EaselJS/0.8.0/easeljs.min.js"></script>
+</head>
+<body>
+  <canvas id="gameView" width='500px' height='400px'></canvas>
+  <script>
+  var stage = new createjs.Stage('gameView');
+  var gameView = new createjs.Container();
+  var apls = 0.01,x=0;
+
+  stage.addChild(gameView);
+
+  var bitmap = new createjs.Bitmap('https://img1.doubanio.com/view/photo/photo/public/p2437548068.jpg');
+  //bitmap.scaleX = 0.5;
+  //bitmap.scaleY = 0.5;
+  bitmap.setTransform(0,0,0.5,0.5,45,0,0);
+  gameView.addChild(bitmap);
+
+  createjs.Ticker.setFPS(30);
+  createjs.Ticker.addEventListener('tick',function (){
+    alp();
+    stage.update();
+  });
+
+  function alp(){
+    x+=apls;
+    if(x>1){
+      apls = Math.abs(apls)*-1;
+    }else if(x<0){
+      apls = Math.abs(apls)*1;
+    }
+    bitmap.alpha = x;
+    console.log(x);
+  };
+
+  </script>
+</body>
+</html>

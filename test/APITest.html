@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../lib/easeljs-0.8.2.min.js"></script>
+</head>
+<body>
+<canvas id="canvas" width="1200" height="800"></canvas>
+<script>
+  var stage = new createjs.Stage('canvas');
+  var line = new createjs.Graphics();
+  var img = new Image();
+  img.src = '../img/icon.png';
+  img.onload = bs;
+  line.setStrokeStyle(3).setStrokeDash([5,5],0).beginStroke('red').moveTo(30,50).lineTo(200,50).endStroke();
+
+
+  line.beginFill('gray').arc(100,100,50,0*Math.PI/180,360*Math.PI/180,false).endFill();
+  line.setStrokeStyle(9).setStrokeDash([0,0],0).beginStroke('red').arc(100,100,50,90*Math.PI/180,(90+45)*Math.PI/180,false).endStroke();
+  line.setStrokeStyle(3).beginStroke('green').drawEllipse(50,20,100,160);
+  line.setStrokeStyle(1).beginStroke('blue').moveTo(50,20).arcTo(100,100,300,100,200);
+
+  line.beginRadialGradientFill(['red','blue'],[0,1],200,100,30,200,100,100).drawCircle(200,100,100);
+  line.beginLinearGradientFill(['red','green'],[0,1],300,100,400,100).drawRect(300,100,100,500);
+  line.drawPolyStar(600,100,50,6,0.5,0);
+  function bs(){
+  line.setStrokeStyle(30).beginBitmapStroke(img).rect(50,50,200,200);
+  line.beginBitmapFill(img).drawRoundRectComplex(100,100,200,200,50,50,50,50);
+  stage.update();
+  };
+
+  var text = new createjs.Text();
+  text.text = 'H ello World';
+  text.textAlign = 'center';
+  text.color = 'yellow';
+  text.font = 'bold 42px Arial';
+  text.x = 200;
+  text.lineWidth = 10;
+  text.lineHeight = 50;
+  var sline = new createjs.Shape(line);
+  stage.addChild(sline,text);
+  stage.update();
+
+
+
+
+
+</script>
+</body>
+</html>

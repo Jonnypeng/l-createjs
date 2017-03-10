@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+</head>
+<body>
+<canvas id="canvas" width='500' height='500'></canvas>
+
+<script>
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+var stage = new createjs.Stage(canvas);
+var rect = new createjs.Shape();
+var line = new createjs.Shape();
+
+rect.graphics.beginFill('#eee').drawRect(0,0,310,300);
+line.graphics.setStrokeStyle(2).setStrokeDash([3,3],0).beginStroke('black').moveTo(10,100).lineTo(300,100);
+line.graphics.setStrokeStyle(2).setStrokeDash([0,0],0).beginStroke('black').moveTo(10,100).quadraticCurveTo(10,100,300,100);
+
+var num = -100;
+var numX = 10;
+var draw = setInterval(function (){
+num+=1;
+line.graphics.clear();
+drawLine();
+stage.update();
+if(num>=300){
+   clearInterval(draw);
+   }
+},40);
+
+rect.addEventListener('mousedown',function (event){
+//num = event.localY;
+//numX = event.localX;
+//line.graphics.clear();
+//drawLine();
+//stage.update();
+console.log('start');
+});
+
+rect.addEventListener('mousemove',function (event){
+  console.log('e.localX');
+});
+
+function drawLine(){
+line.graphics.setStrokeStyle(2).setStrokeDash([0,0],0).beginStroke('black').moveTo(10,100).quadraticCurveTo(numX,num,300,100);
+};
+stage.addChild(rect,line);
+stage.update();
+</script>
+</body>
+</html>
